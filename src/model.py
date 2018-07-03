@@ -1,12 +1,11 @@
-class Course:
-    pass
-class Area:
-    pass
-class Internship:
-    pass
+def get_main_menu():
+    menu = {
+        "Divulgar Vaga", 
+        "Consultar Tabela de Período Mínimo", 
+        "Buscar Vagas"
+    }
 
-class Model:
-    
-    # constructor
-    def __init__(self):
-        print("Model instantiated")
+    return menu
+
+def get_areas():
+    return ["Biologicas", "Exatas"]
