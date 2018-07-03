@@ -1,12 +1,13 @@
-from view import View
-from controller import Controller
-from model import Model
+import router
 
-
+# rota principal
 def main():
-    m = Model()
-    v = View()
-    c = Controller()
+    controller = router.route("main menu")
+
+    while True:
+        controller = router.route(controller.act())
+        if controller == None:
+            break
 
 if __name__ == "__main__":
     main()

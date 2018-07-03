@@ -1,7 +1,7 @@
-from model import Course
-
 class View:
-    
-    # view
     def __init__(self):
-        print("View instantiated")
+        pass
+
+    def show_list(self, data):
+        for data_index in range(0, len(data)):
+            print(str(data_index + 1) + ". " + data[data_index])
