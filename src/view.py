@@ -11,8 +11,10 @@ class View(object):
             return AreaSelect()
         elif type == "course menu":
             return CourseSelect()
-        elif type == "mural":
-            return Mural()
+        elif type == "course mural":
+            return CourseMural()
+        else:
+            return
 
     factory = staticmethod(factory)
 
@@ -46,17 +48,23 @@ class CourseSelect(View):
 
         print (courses[0] + '\n\n' + courses[1])
 
-        for course_number in range(0, len(courses[2])):
-            print(str(course_number+1) + ". " + courses[2][course_number])
+        for course_number in range(2, len(courses)):
+            print(str(course_number-1) + ". " + courses[course_number])
 
         option = int(input("\n: "))
-        return courses[2][option-1]
+        return courses[option+1]
 
     show_list = staticmethod(show_list)
 
-class Mural(View):
+class CourseMural(View):
     def show_list(mural):
-        print (mural + '\n')
-        return
+
+        print (mural[0] + '\n\n' + mural[1])
+
+        for mural_number in range(2, len(mural)):
+            print(str(mural_number+1) + ". " + mural[mural_number])
+
+        option = int(input("\n: "))
+        return option
 
     show_list = staticmethod(show_list)

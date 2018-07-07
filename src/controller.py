@@ -12,10 +12,13 @@ class Controller(object):
             return AreaSelect()
         elif type == "course menu":
             __class__.option = args[0]
+            print(__class__.option)
             return CourseSelect()
-        elif type == "mural":
+        elif type == "course mural":
+            __class__.option = ""
             __class__.option = args[0]
-            return Mural()
+            print(__class__.option)
+            return CourseMural()
 
     factory = staticmethod(factory)
 
@@ -31,9 +34,10 @@ class MainMenu(Controller):
         if option == 1:
             return ""
         elif option == 2:
-            return ""
-        elif option == 3:
             return "area menu"
+        elif option == 3:
+            print("Até Mais!\n")
+            return None
 
 
 class AreaSelect(Controller):
@@ -51,15 +55,14 @@ class CourseSelect(Controller):
         courses = model.get_courses(Controller.options())
         view = View.factory("course menu")
         option = view.show_list(courses)
-        print("Mural option: " + option)
 
-        return "mural", option
+        return "course mural", option
 
 
-class Mural(Controller):
+class CourseMural(Controller):
     def act(self):
-        mural = Controller.options()
-        view = View.factory("mural")
-        view.show_list(mural)
+        mural = model.get_internships(Controller.options())
+        view = View.factory("course mural")
+        option = view.show_list(mural)
 
-        return None
+        return
