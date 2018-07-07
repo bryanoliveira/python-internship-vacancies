@@ -1,0 +1,18 @@
+[
+    "BUSCAR VAGAS", 
+    "Selecione o curso desejado", 
+    [
+        "Biomedicina", 
+        "Ci\u00eancias Biol\u00f3gicas", 
+        "Biotecnologia", 
+        "Ecologia e An\u00e1lise Ambiental"
+    ], 
+    [
+        "Ci\u00eancia da Computa\u00e7\u00e3o", 
+        "F\u00edsica", 
+        "F\u00edsica M\u00e9dica", 
+        "Matem\u00e1tica", 
+        "Qu\u00edmica", 
+        "Estat\u00edstica"
+    ]
+]
