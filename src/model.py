@@ -23,7 +23,6 @@ class MementoCaretaker(object):
 
 ## CONSTANTES
 
-_system_name = "CENTRAL DE ESTÁGIOS"
 _menu_main_location = "databases/main.json"
 _menu_areas_location = "databases/areas.json"
 _menu_courses_location = "databases/courses.json"
@@ -47,29 +46,22 @@ def save_state(controller):
 
 def get_main_menu():
     menu = readlines(_menu_main_location)
-
-    menu[0] = _system_name + ' - ' + menu[0]
-
     return menu
 
 def get_areas():
     areas = readlines(_menu_areas_location)
-
-    areas[0] = _system_name + ' - ' + areas[0]
-
     return areas
 
 def get_courses(area_id): # int
     all_courses = readlines(_menu_courses_location)
 
     courses = []
-    courses.append(_system_name + ' - ' + all_courses[0])
+    courses.append(all_courses[0])
     courses.append(all_courses[1])
     for course in all_courses[1+area_id]:
         courses.append(course)
 
     return courses
-
 
 def save_internship(internship): # Internship object
     file = open(_menu_internships_location, 'r+')
@@ -81,7 +73,7 @@ def get_internships(course): # course string
     file = open(_menu_internships_location, 'r')
     all_internships = json.load(file)
     internships = []
-    internships.append(_system_name + ' - ' + all_internships[0])
+    internships.append(all_internships[0])
     internships.append(all_internships[1])
     del all_internships[0:2]
     for internship in all_internships:
