@@ -1,31 +1,32 @@
 import os
 
-_system_name = "CENTRAL DE ESTÁGIOS"
+_system_name = "\033[1;37mCENTRAL DE ESTÁGIOS\033[0m"
 
 class View(object):
 
-    main = "main menu"
-    area = "area menu"
-    course = "course menu"
-    mural = "course mural"
-    registration = "registration menu"
+    _main = "main menu"
+    _area = "area menu"
+    _course = "course menu"
+    _mural = "course mural"
+    _registration = "registration menu"
+    _back = "go back"
 
     def factory(type):
         os.system('cls' if os.name == 'nt' else 'clear')
 
-        if type == __class__.main:
+        if type == __class__._main:
             return MainMenu()
 
-        elif type == __class__.area:
+        elif type == __class__._area:
             return AreaSelect()
 
-        elif type == __class__.course:
+        elif type == __class__._course:
             return CourseSelect()
 
-        elif type == __class__.mural:
+        elif type == __class__._mural:
             return CourseMural()
 
-        elif type == __class__.registration:
+        elif type == __class__._registration:
             return RegistrationMenu()
 
         else:
@@ -42,8 +43,19 @@ class MainMenu(View):
             for options_number in range(1, len(options)):
                 print(str(options_number) + ". " + options[options_number])
 
-            option = int(input('\n: '))
-            if option > 0 and option < 4:
+            option = str(input("\n[Para sair do programa: 'sair']\n: "))
+
+            if option == "sair":
+                return None
+
+            try:
+                option = int(option)
+            except:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("**Entrada inválida!**")
+                continue
+
+            if 0 < option < len(options):
                 return option
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
@@ -57,21 +69,28 @@ class AreaSelect(View):
         while True:
             print (_system_name + " - " + areas[0] + '\n\n' + areas[1])
             for area_number in range(2, len(areas)):
-                print(str(area_number-1) + ". " + areas[area_number])
+                print(str(area_number - 1) + ". " + areas[area_number])
 
             option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
+            
             if option == "sair":
                 return None
             elif option == "voltar":
-                return None
-            else:
+                return self._back
+
+            try:
                 option = int(option)
-                if option > 0 and option < len(areas)-2:
-                    return option
-                else:
-                    os.system('cls' if os.name == 'nt' else 'clear')
-                    print("**Entrada inválida!**")
-                    continue
+            except:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("**Entrada inválida!**")
+                continue
+
+            if 0 < option < len(areas) - 1:
+                return option
+            else:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("**Entrada inválida!**")
+                continue
 
 
 class CourseSelect(View):
@@ -84,32 +103,45 @@ class CourseSelect(View):
                 print(str(course_number-1) + ". " + courses[course_number])
 
             option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
+
             if option == "sair":
                 return None
             elif option == "voltar":
-                return None
-            else:
+                return self._back
+            
+            try:
                 option = int(option)
-                if option > 0 and option < len(courses)-2:
-                    return courses[option+1]
-                else:
-                    os.system('cls' if os.name == 'nt' else 'clear')
-                    print("**Entrada inválida!**")
-                    continue
+            except:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("**Entrada inválida!**")
+                continue
+
+            if 0 < option < len(courses) - 1:
+                return courses[option + 1]
+            else:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("**Entrada inválida!**")
+                continue
 
 
 class CourseMural(View):
-    #!TODO arrumar estrutura de visualização das vagas
     def show_list(self, mural):
 
         while True:
-            print (_system_name + " - AREAS\n\n")
+            print (_system_name + " - MURAL\n\n")
+
+            for internship in mural:
+                internship.to_string()
+
+            if len(mural) == 0:
+                print("Nenhuma vaga para este curso.")
 
             option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
+
             if option == "sair":
                 return None
             elif option == "voltar":
-                return None
+                return self._back
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print("**Entrada inválida!**")
@@ -120,48 +152,59 @@ class RegistrationMenu(View):
 
         while True:
             print(_system_name + " - CADASTRO DE VAGAS\n")
-            name = str(input("Nome: "))
-            description = str(input("Descrição: "))
-            courses = str(input("Cursos: "))
+            name = str(input("Título da vaga: "))
+            description = str(input("Descrição detalhada: "))
+            courses = str(input("Cursos aceitos (separados por vírgula e um espaço): "))
 
             os.system('cls' if os.name == 'nt' else 'clear')
 
             print(_system_name + " - CADASTRO DE VAGAS\n")
-            print("VAGA\nNome: " + name + "\nDescrição: " + description + "\nCursos: " + courses)
+            print("NOVA VAGA:\nNome: " + name + "\nDescrição: " + description + "\nCursos: " + courses)
 
             print("\n\nVocê gostaria de:")
-            print("1. Salvar informações")
-            print("2. Editar informações")
-            print("3. Voltar ao menu anterior")
-            print("4. Sair do programa")
-            option = int(input("\n: "))
+            print("1. Salvar as informações")
+            print("2. Editar as informações")
+            
+            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
+
+            if option == "sair":
+                return None
+            elif option == "voltar":
+                return self._back
+
+            try:
+                option = int(option)
+            except:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("**Entrada inválida!**")
+                continue
 
             if option == 1:
                 break
             elif option == 2:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print("**Editando informações!**")
-            elif option == 3:
-                return None
-            elif option == 4:
-                return None
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada innválida!**")
+                print("**Entrada inválida!**")
 
 
         os.system('cls' if os.name == 'nt' else 'clear')
 
+        internship = [name, description, courses]
+        return internship
+
+    def show_success(self):
         while True:
             print(_system_name + " - CADASTRO DE VAGAS\n")
             print("Vaga cadastrada com sucesso!\n")
             option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
-            if option == "sair" or option == "voltar":
-                break
+
+            if option == "sair":
+                return None
+            elif option == "voltar":
+                return self._back
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print("**Entrada inválida!**")
                 continue
-
-        internship = [option, name, description, courses]
-        return internship

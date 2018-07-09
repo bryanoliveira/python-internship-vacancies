@@ -6,7 +6,34 @@ class Internship(object):
     def __init__(self, name, description, courses): # string, string, string list
         self.name = name
         self.description = description
-        self.courses = courses
+        if type(courses) is str:
+            self.courses = [course.strip() for course in courses.split(',')]
+        else:
+            self.courses = courses
+
+    def dump(self):
+        me = []
+        me.append(self.name)
+        me.append(self.description)
+        me.append(self.courses)
+
+        return me
+
+    
+    def to_string(self):
+        cslen = len("Cursos aceitos: ") + sum([len(course) for course in self.courses]) + 2 * len(self.courses) # tamanho da linha de cursos
+        horiz = max([len(self.name), len(self.description), cslen]) + 1 # tamanho máximo de cada linha
+
+        print("+" + "-" * horiz + "+")
+        print("| \033[1;37m" + self.name + "\033[0m " * (horiz - len(self.name) - 1) + "|")
+        print("+" + "-" * horiz + "+")
+        print("| " + self.description + " " * (horiz - len(self.description) - 1) + "|")
+        print("+" + "-" * horiz + "+")
+        print("| " + "Cursos aceitos: ", end='')
+        for course in self.courses[:-1]:
+            print(course, end=', ')
+        print(self.courses[-1] + " " * (horiz - cslen + 1) + "|")
+        print("+" + "-" * horiz + "+\n")
 
 class MementoCaretaker(object):
     def __init__(self):
@@ -17,9 +44,12 @@ class MementoCaretaker(object):
         self.history.append(controller)
 
     def undo(self):
-        controller = self.history[-1]
-        self.history.pop()
-        return controller
+        if len(self.history) > 0:
+            controller = self.history[-1]
+            self.history.pop()
+            return controller
+        else:
+            return None
 
 ## CONSTANTES
 
@@ -42,7 +72,8 @@ def go_back():
     return _memento.undo()
 
 def save_state(controller):
-    _memento.save(controller)
+    if controller != None:
+        _memento.save(controller)
 
 def get_main_menu():
     menu = readlines(_menu_main_location)
@@ -64,20 +95,27 @@ def get_courses(area_id): # int
     return courses
 
 def save_internship(internship): # Internship object
-    file = open(_menu_internships_location, 'r+')
-    internships = json.load(file)
-    internships += internship
-    json.dump(file, internships)
+    internships = []
+    with open(_menu_internships_location, 'r') as file:
+        internships = json.loads(file.read())
+        file.close()
+
+    internships.append(internship.dump())
+
+    with open(_menu_internships_location, 'w') as file:
+        file.write(json.dumps(internships))
 
 def get_internships(course): # course string
-    file = open(_menu_internships_location, 'r')
-    all_internships = json.load(file)
     internships = []
-    internships.append(all_internships[0])
-    internships.append(all_internships[1])
-    del all_internships[0:2]
-    for internship in all_internships:
-        if course in internship.courses:
-            internships += internship
+    with open(_menu_internships_location, 'r') as file:
+        all_internships = json.loads(file.read())
+
+        print(all_internships)
+        for t_internship in all_internships:
+            internship = Internship(t_internship[0], t_internship[1], t_internship[2])
+            if course in internship.courses:
+                internships.append(internship)
+
+        file.close()
 
     return internships

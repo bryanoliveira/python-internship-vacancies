@@ -2,46 +2,40 @@ import model
 from view import View
 
 class Controller(object):
-    option = 0
+    def __init__(self, _option = 0):
+        self._option = _option
 
     def factory(type, *args):
 
-        if type == View.main:
+        if type == View._main:
             return MainMenu()
 
-        elif type == View.area:
+        elif type == View._area:
             return AreaSelect()
 
-        elif type == View.course:
-            __class__.option = args[0]
-            print(__class__.option)
-            return CourseSelect()
+        elif type == View._course:
+            return CourseSelect(args[0])
 
-        elif type == View.mural:
-            __class__.option = ""
-            __class__.option = args[0]
-            print(__class__.option)
-            return CourseMural()
+        elif type == View._mural:
+            print(args[0])
+            return CourseMural(args[0])
 
-        elif type == View.registration:
+        elif type == View._registration:
             return RegistrationMenu()
 
     factory = staticmethod(factory)
 
-    def options():
-        return __class__.option
-
 class MainMenu(Controller):
     def act(self):
         menu = model.get_main_menu()
-        view = View.factory(View.main)
+        view = View.factory(View._main)
         option = view.show_list(menu)
 
         if option == 1:
-            return View.registration
+            return View._registration
 
         elif option == 2:
-            return View.area
+            return View._area
 
         elif option == 3:
             return None
@@ -50,52 +44,62 @@ class MainMenu(Controller):
 class AreaSelect(Controller):
     def act(self):
         areas = model.get_areas()
-        view = View.factory(View.area)
+        view = View.factory(View._area)
         option = view.show_list(areas)
 
         if option == None:
             return None
+        elif option == View._back:
+            return View._back
         else:
-            return View.course, option
+            return View._course, option
 
 
 class CourseSelect(Controller):
     def act(self):
-        courses = model.get_courses(Controller.options())
-        view = View.factory(View.course)
+        courses = model.get_courses(self._option)
+        view = View.factory(View._course)
         option = view.show_list(courses)
 
         if option == None:
             return None
+        elif option == View._back:
+            return View._back
         else:
-            return View.mural, option
+            return View._mural, option
 
 
 class CourseMural(Controller):
     def act(self):
-        mural = model.get_internships(Controller.options())
-        view = View.factory(View.mural)
+        mural = model.get_internships(self._option)
+        view = View.factory(View._mural)
         option = view.show_list(mural)
 
         if option == None:
             return None
+        elif option == View._back:
+            return View._back
         else:
             return None
 
 class RegistrationMenu(Controller):
     def act(self):
-        view = View.factory(View.registration)
+        view = View.factory(View._registration)
         internship = view.get_informations()
 
         if internship == None:
             return None
+        elif internship == View._back:
+            return View._back
         else:
-            save = model.Internship(internship[1], internship[2], internship[3])
-            #!TODO verficar erro ao salvar vaga
-            #model.save_internship(save)
+            save = model.Internship(internship[0], internship[1], internship[2])
+            model.save_internship(save)
 
+            option = view.show_success()
 
-            if internship[0] == "sair":
+            if option == None:
                 return None
+            elif option == View._back:
+                return View._back
             else:
                 return None

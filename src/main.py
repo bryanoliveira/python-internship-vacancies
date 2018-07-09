@@ -5,10 +5,10 @@ from controller import Controller
 # rota principal
 def main():
     
-    controller = router.route("main menu")
+    controller = router.route(None, "main menu")
 
     while True:
-        controller = router.route(controller.act())
+        controller = router.route(controller, controller.act())
         if controller == None:
             break
 
