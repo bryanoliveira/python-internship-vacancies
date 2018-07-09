@@ -64,12 +64,12 @@ class MainMenu(View):
 
 
 class AreaSelect(View):
-    def show_list(self, areas):
+    def show_list(self, options):
 
         while True:
-            print (_system_name + " - " + areas[0] + '\n\n' + areas[1])
-            for area_number in range(2, len(areas)):
-                print(str(area_number - 1) + ". " + areas[area_number])
+            print (_system_name + " - " + options[0] + '\n\n' + options[1])
+            for area_number in range(2, len(options)):
+                print(str(area_number - 1) + ". " + options[area_number])
 
             option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
             
@@ -85,7 +85,7 @@ class AreaSelect(View):
                 print("**Entrada inválida!**")
                 continue
 
-            if 0 < option < len(areas) - 1:
+            if 0 < option < len(options) - 1:
                 return option
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
@@ -94,13 +94,13 @@ class AreaSelect(View):
 
 
 class CourseSelect(View):
-    def show_list(self, courses):
+    def show_list(self, options):
 
         while True:
-            print (_system_name + " - " + courses[0] + '\n\n' + courses[1])
+            print (_system_name + " - " + options[0] + '\n\n' + options[1])
 
-            for course_number in range(2, len(courses)):
-                print(str(course_number-1) + ". " + courses[course_number])
+            for course_number in range(2, len(options)):
+                print(str(course_number-1) + ". " + options[course_number])
 
             option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
 
@@ -116,8 +116,8 @@ class CourseSelect(View):
                 print("**Entrada inválida!**")
                 continue
 
-            if 0 < option < len(courses) - 1:
-                return courses[option + 1]
+            if 0 < option < len(options) - 1:
+                return options[option + 1]
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print("**Entrada inválida!**")
@@ -125,15 +125,15 @@ class CourseSelect(View):
 
 
 class CourseMural(View):
-    def show_list(self, mural):
+    def show_list(self, options):
 
         while True:
             print (_system_name + " - MURAL\n\n")
 
-            for internship in mural:
-                internship.to_string()
+            for internship in options:
+                internship.show()
 
-            if len(mural) == 0:
+            if len(options) == 0:
                 print("Nenhuma vaga para este curso.")
 
             option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))

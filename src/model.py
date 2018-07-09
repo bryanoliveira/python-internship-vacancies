@@ -20,7 +20,7 @@ class Internship(object):
         return me
 
     
-    def to_string(self):
+    def show(self):
         cslen = len("Cursos aceitos: ") + sum([len(course) for course in self.courses]) + 2 * len(self.courses) # tamanho da linha de cursos
         horiz = max([len(self.name), len(self.description), cslen]) + 1 # tamanho máximo de cada linha
 
