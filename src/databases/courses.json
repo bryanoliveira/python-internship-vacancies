@@ -2,17 +2,79 @@
     "BUSCAR VAGAS", 
     "Selecione o curso desejado", 
     [
+        "Agronomia",
+        "Medicina Veterin\u00e1ria",
+        "Zootecnia"
+    ],
+    [
         "Biomedicina", 
         "Ci\u00eancias Biol\u00f3gicas", 
         "Biotecnologia", 
         "Ecologia e An\u00e1lise Ambiental"
     ], 
     [
+        "Enfermagem",
+        "Medicina",
+        "Farm\u00e1cia",
+        "Nutri\u00e7\u00e3o",
+        "Odontologia",
+        "Educa\u00e7\u00e3o Física"
+    ],
+    [
         "Ci\u00eancia da Computa\u00e7\u00e3o", 
         "F\u00edsica", 
         "F\u00edsica M\u00e9dica", 
         "Matem\u00e1tica", 
         "Qu\u00edmica", 
-        "Estat\u00edstica"
+        "Estat\u00edstica",
+        "Ci\u00eancias Ambientais",
+        "Gest\u00e3o da Informa\u00e7\u00e3o",
+        "Sistemas de Informa\u00e7\u00e3o",
+        "Engenharia de software"
+
+    ],
+    [
+        "Ci\u00eancias Sociais",
+        "Filosofia",
+        "Geografia",
+        "História",
+        "Pedagogia",
+        "Psicologia",
+        "Rela\u00e7ões Internacionais",
+        "Design Gr\u00e1fico"
+    ],
+    [
+        "Administra\u00e7\u00e3o",
+        "Arquitetura e Urbanismo",
+        "Biblioteconomia",
+        "Ci\u00eancias Cont\u00e1beis",
+        "Ci\u00eancias Econômicas",
+        "Comunicação Social",
+        "Direito",
+        "Design de Ambientes",
+        "Design de Moda",
+        "Museologia"
+    ],
+    [
+        "Engenharia de Alimentos",
+        "Engenharia de Produ\u00e7\u00e3o",
+        "Engenharia Civil",
+        "Engenharia Elétrica",
+        "Engenharia de Computa\u00e7\u00e3o",
+        "Engenharia Ambiental",
+        "Engenharia Física",
+        "Engenharia Florestal",
+        "Engenharia Mecânica",
+        "Engenharia Química",
+        "Engenharia de Transporte"
+    ],
+    [
+        "Letras",
+        "Artes C\u00eanicas",
+        "Artes Visuais",
+        "Música",
+        "Musicoterapia",
+        "Dan\u00e7a",
+        "Dire\u00e7\u00e3o de Arte"
     ]
 ]

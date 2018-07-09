@@ -52,14 +52,14 @@ class MainMenu(View):
                 option = int(option)
             except:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
                 continue
 
             if 0 < option < len(options):
                 return option
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
                 continue
 
 
@@ -71,7 +71,7 @@ class AreaSelect(View):
             for area_number in range(2, len(options)):
                 print(str(area_number - 1) + ". " + options[area_number])
 
-            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
+            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar']\n: "))
             
             if option == "sair":
                 return None
@@ -82,14 +82,14 @@ class AreaSelect(View):
                 option = int(option)
             except:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
                 continue
 
             if 0 < option < len(options) - 1:
                 return option
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
                 continue
 
 
@@ -102,7 +102,7 @@ class CourseSelect(View):
             for course_number in range(2, len(options)):
                 print(str(course_number-1) + ". " + options[course_number])
 
-            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
+            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar']\n: "))
 
             if option == "sair":
                 return None
@@ -113,14 +113,14 @@ class CourseSelect(View):
                 option = int(option)
             except:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
                 continue
 
             if 0 < option < len(options) - 1:
                 return options[option + 1]
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
                 continue
 
 
@@ -134,9 +134,9 @@ class CourseMural(View):
                 internship.show()
 
             if len(options) == 0:
-                print("Nenhuma vaga para este curso.")
+                print("\033[0;33mNenhuma vaga para este curso.\033[0m")
 
-            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
+            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar']\n: "))
 
             if option == "sair":
                 return None
@@ -144,7 +144,7 @@ class CourseMural(View):
                 return self._back
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
                 continue
 
 class RegistrationMenu(View):
@@ -154,7 +154,7 @@ class RegistrationMenu(View):
             print(_system_name + " - CADASTRO DE VAGAS\n")
             name = str(input("Título da vaga: "))
             description = str(input("Descrição detalhada: "))
-            courses = str(input("Cursos aceitos (separados por vírgula e um espaço): "))
+            courses = str(input("Cursos aceitos (separados por vírgula): "))
 
             os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -165,7 +165,7 @@ class RegistrationMenu(View):
             print("1. Salvar as informações")
             print("2. Editar as informações")
             
-            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
+            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar']\n: "))
 
             if option == "sair":
                 return None
@@ -176,17 +176,17 @@ class RegistrationMenu(View):
                 option = int(option)
             except:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
                 continue
 
             if option == 1:
                 break
             elif option == 2:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Editando informações!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
 
 
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -197,8 +197,8 @@ class RegistrationMenu(View):
     def show_success(self):
         while True:
             print(_system_name + " - CADASTRO DE VAGAS\n")
-            print("Vaga cadastrada com sucesso!\n")
-            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar' ]\n: "))
+            print("\033[0;32mVaga cadastrada com sucesso!\033[0m\n")
+            option = str(input("\n[Para sair do programa: 'sair' | Para voltar: 'voltar']\n: "))
 
             if option == "sair":
                 return None
@@ -206,5 +206,5 @@ class RegistrationMenu(View):
                 return self._back
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print("**Entrada inválida!**")
+                print("\033[1;31m**Entrada inválida!**\033[0m")
                 continue
